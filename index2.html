@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tập Gym Nội Tâm — Trở Thành Cô Gái Chính Mình Ngưỡng Mộ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fuchsia: #BB3F95;
+  --purple: #560A39;
+  --helio: #6B4773;
+  --lavender: #E0E1F6;
+  --cadet: #231F48;
+  --cream: #F2EFE9;
+  --white: #FAF9F7;
+  --dark: #2C1F2E;
+  --text: #4a4050;
+  --light: #F7F5F2;
+  --mid: #EDE9E3;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Raleway',sans-serif; background:var(--white); color:var(--dark); overflow-x:hidden; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:18px 60px; display:flex; justify-content:space-between; align-items:center;
+  background:rgba(250,249,247,0.95); backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(187,63,149,0.1);
+}
+.logo { font-family:'Cormorant Garamond',serif; font-size:1.15rem; letter-spacing:0.12em; color:var(--helio); font-style:italic; font-weight:600; }
+.nav-links a { font-size:0.67rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--cadet); text-decoration:none; margin-left:30px; transition:color 0.3s; font-weight:500; }
+.nav-links a:hover { color:var(--fuchsia); }
+
+/* SHARED */
+.section-tag { font-size:0.58rem; letter-spacing:0.38em; text-transform:uppercase; color:var(--helio); display:block; margin-bottom:14px; }
+.section-heading { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:300; line-height:1.18; color:var(--dark); }
+.section-heading em { font-style:italic; color:var(--fuchsia); }
+.divider { width:52px; height:2px; background:linear-gradient(to right,var(--fuchsia),transparent); margin:22px 0; }
+.body-text { font-size:0.9rem; line-height:1.95; color:var(--text); }
+
+.cta-btn {
+  display:inline-flex; align-items:center; gap:12px; padding:18px 44px;
+  background:var(--purple); color:white; text-decoration:none; border:none; cursor:pointer;
+  font-family:'Raleway',sans-serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase;
+  font-weight:600; transition:all 0.4s; position:relative; overflow:hidden;
+}
+.cta-btn::before { content:''; position:absolute; inset:0; background:var(--fuchsia); transform:translateX(-100%); transition:transform 0.4s; }
+.cta-btn span { position:relative; z-index:1; }
+.cta-btn:hover::before { transform:translateX(0); }
+
+.reveal { opacity:0; transform:translateY(24px); transition:all 0.65s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── S1: HERO ── */
+.hero {
+  min-height:100vh; display:grid; grid-template-columns:1.15fr 0.85fr;
+  padding-top:56px; overflow:hidden;
+}
+.hero-photo-col { position:relative; overflow:hidden; min-height:600px; }
+.hero-photo { position:absolute; inset:0; overflow:hidden; }
+.hero-photo img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
+.hero-photo::after { content:''; position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, var(--white) 100%); pointer-events:none; }
+}
+.hero-photo::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to right, transparent 60%, var(--white) 100%);
+}
+.hero-content { display:flex; flex-direction:column; justify-content:center; padding:80px 60px 80px 50px; }
+.hero-price-box {
+  margin:28px 0 36px 0; padding:18px 24px;
+  border-left:3px solid var(--fuchsia); background:var(--light);
+  display:flex; align-items:center; gap:30px;
+}
+.hero-price-strike { font-size:0.8rem; color:var(--helio); text-decoration:line-through; }
+.hero-price-main { font-family:'Cormorant Garamond',serif; font-size:2.2rem; color:var(--purple); font-weight:300; }
+.hero-price-main sup { font-size:1rem; }
+.hero-price-sub { font-size:0.75rem; color:var(--text); line-height:1.5; }
+
+/* ── S2: ORIGIN STORY ── */
+.origin-section { padding:120px 60px; background:var(--cream); }
+.origin-inner { max-width:1100px; margin:0 auto; }
+.story-block { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; margin-bottom:90px; }
+.story-text h3 { font-family:'Cormorant Garamond',serif; font-size:1.35rem; color:var(--purple); margin-bottom:18px; font-weight:400; }
+.story-text p { font-size:0.92rem; line-height:1.95; color:var(--text); margin-bottom:16px; }
+.story-image img { width:100%; border-radius:14px; box-shadow:0 12px 35px rgba(86,10,57,0.15); }
+.origin-stages { display:grid; grid-template-columns:repeat(5,1fr); gap:18px; margin-top:70px; }
+.stage-card { background:white; padding:22px 16px; border-radius:12px; border-left:3px solid var(--fuchsia); text-align:center; box-shadow:0 4px 14px rgba(187,63,149,0.09); transition:all 0.3s; }
+.stage-card:hover { transform:translateY(-5px); box-shadow:0 14px 28px rgba(187,63,149,0.18); }
+.stage-num { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600; color:var(--fuchsia); margin-bottom:6px; }
+.stage-title { font-size:0.78rem; font-weight:700; color:var(--purple); margin-bottom:6px; letter-spacing:0.05em; }
+.stage-desc { font-size:0.75rem; line-height:1.65; color:var(--text); }
+
+/* ── S3: FUTURE VISION ── */
+.vision-section { padding:120px 60px; background:white; }
+.vision-inner { max-width:880px; margin:0 auto; }
+.vision-text { font-size:0.93rem; line-height:2; color:var(--text); margin-bottom:24px; }
+.vision-pull {
+  padding:28px 32px; margin:32px 0;
+  background:linear-gradient(135deg,rgba(224,225,246,0.5),rgba(187,63,149,0.06));
+  border-left:4px solid var(--fuchsia); border-radius:0 12px 12px 0;
+  font-size:0.95rem; line-height:1.9; color:var(--purple); font-style:italic;
+}
+
+/* ── S4: FRAMEWORK ── */
+.framework-section { padding:120px 60px; background:var(--cream); }
+.framework-inner { max-width:1100px; margin:0 auto; }
+.framework-intro { font-size:0.9rem; line-height:1.95; color:var(--text); max-width:780px; margin:0 auto 70px; text-align:center; }
+.framework-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:36px; margin-bottom:80px; }
+.fw-card { background:white; padding:42px 32px; border-radius:14px; box-shadow:0 8px 28px rgba(187,63,149,0.09); border-top:4px solid var(--fuchsia); }
+.fw-card h3 { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--purple); margin-bottom:6px; }
+.fw-card h4 { font-size:0.75rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--fuchsia); margin-bottom:20px; }
+.fw-card p { font-size:0.88rem; line-height:1.85; color:var(--text); margin-bottom:14px; }
+.fw-card .example { background:var(--light); padding:14px 16px; border-radius:8px; font-size:0.82rem; line-height:1.7; color:var(--text); font-style:italic; margin:16px 0; }
+.fw-card .miss { font-size:0.8rem; color:var(--helio); font-weight:600; margin-top:14px; }
+
+/* ── S5: PAIN ── */
+.pain-section { padding:120px 60px; background:white; }
+.pain-inner { max-width:900px; margin:0 auto; }
+.pain-block { padding:28px 32px; background:var(--light); border-radius:12px; margin-bottom:24px; font-size:0.92rem; line-height:1.95; color:var(--text); }
+.pain-block strong { color:var(--purple); }
+.pain-close { margin-top:40px; padding:32px; background:linear-gradient(135deg,var(--lavender),rgba(187,63,149,0.08)); border-radius:12px; text-align:center; }
+.pain-close p { font-size:0.92rem; line-height:1.85; color:var(--text); }
+.pain-close strong { color:var(--purple); }
+
+/* ── S6: PRODUCT ── */
+.product-section { padding:120px 60px; background:linear-gradient(160deg,var(--purple),var(--helio)); color:white; }
+.product-inner { max-width:1100px; margin:0 auto; }
+.product-section .section-heading { color:white; }
+.product-section em { color:var(--lavender); }
+.product-section .section-tag { color:rgba(255,255,255,0.6); }
+.product-section .divider { background:linear-gradient(to right,var(--lavender),transparent); }
+.mechanism { font-size:0.92rem; line-height:1.95; margin-bottom:20px; color:rgba(255,255,255,0.88); }
+.mechanism strong { color:var(--lavender); }
+.what-you-get { margin:50px 0; }
+.what-you-get h3 { font-family:'Cormorant Garamond',serif; font-size:1.6rem; margin-bottom:24px; }
+.get-list { list-style:none; }
+.get-list li { font-size:0.9rem; line-height:1.85; padding:12px 0 12px 28px; position:relative; border-bottom:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.9); }
+.get-list li::before { content:'→'; position:absolute; left:0; color:var(--lavender); }
+.journey-stages { display:grid; grid-template-columns:repeat(5,1fr); gap:18px; margin-top:60px; }
+.j-stage { background:rgba(255,255,255,0.09); padding:24px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.18); text-align:center; }
+.j-stage h4 { font-size:0.8rem; letter-spacing:0.1em; color:var(--lavender); margin-bottom:10px; }
+.j-stage p { font-size:0.78rem; line-height:1.65; color:rgba(255,255,255,0.8); }
+.differentiators { display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:60px; }
+.diff-card { background:rgba(255,255,255,0.09); padding:32px 28px; border-radius:14px; border:1px solid rgba(255,255,255,0.18); }
+.diff-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--lavender); margin-bottom:14px; }
+.diff-card p { font-size:0.88rem; line-height:1.85; color:rgba(255,255,255,0.85); }
+
+/* ── S7: SOCIAL PROOF ── */
+.proof-section { padding:120px 0 120px 60px; background:var(--cream); overflow:hidden; }
+.proof-inner { max-width:100%; }
+.proof-header { max-width:1040px; margin:0 auto 0 0; padding-right:60px; }
+.cases-scroll-wrap { overflow-x:auto; padding-bottom:20px; margin-top:60px; cursor:grab; }
+.cases-scroll-wrap:active { cursor:grabbing; }
+.cases-scroll-wrap::-webkit-scrollbar { height:4px; }
+.cases-scroll-wrap::-webkit-scrollbar-track { background:rgba(187,63,149,0.08); border-radius:2px; }
+.cases-scroll-wrap::-webkit-scrollbar-thumb { background:var(--fuchsia); border-radius:2px; }
+.cases-row { display:flex; gap:28px; width:max-content; padding-right:60px; }
+.case-card { background:white; padding:36px 28px; border-radius:14px; box-shadow:0 8px 26px rgba(187,63,149,0.1); border-top:3px solid var(--fuchsia); width:380px; flex-shrink:0; display:flex; flex-direction:column; }
+.case-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--purple); margin-bottom:6px; }
+.case-label { font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--fuchsia); margin-bottom:14px; display:block; }
+.case-img { width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:16px; }
+.case-before { font-size:0.85rem; line-height:1.8; color:var(--text); margin-bottom:14px; flex:1; }
+.case-results { list-style:none; margin-bottom:14px; }
+.case-results li { font-size:0.82rem; line-height:1.75; padding-left:18px; position:relative; color:var(--text); margin-bottom:7px; }
+.case-results li::before { content:'✓'; position:absolute; left:0; color:var(--fuchsia); font-weight:bold; }
+.case-quote { background:var(--light); padding:14px 16px; border-radius:8px; font-size:0.82rem; line-height:1.75; color:var(--text); font-style:italic; border-left:3px solid var(--lavender); }
+.cases-footer { margin:50px 60px 0 0; padding:36px 40px; background:white; border-radius:14px; text-align:center; box-shadow:0 8px 26px rgba(187,63,149,0.08); max-width:1040px; }
+.cases-footer p { font-size:0.92rem; line-height:1.9; color:var(--text); }
+.cases-footer strong { color:var(--purple); }
+
+/* ── S8: PRICING ── */
+.pricing-section { padding:120px 60px; background:var(--dark); color:white; }
+.pricing-inner { max-width:1100px; margin:0 auto; }
+.pricing-section .section-heading { color:white; }
+.pricing-section .section-tag { color:rgba(255,255,255,0.5); }
+.pricing-section .divider { background:linear-gradient(to right,var(--lavender),transparent); }
+.pricing-intro { font-size:0.9rem; line-height:1.9; color:rgba(255,255,255,0.75); max-width:700px; margin-bottom:60px; }
+.value-stack { margin-bottom:60px; }
+.value-row {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  padding:22px 0; border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.value-row:last-child { border-bottom:none; }
+.value-left h4 { font-size:0.92rem; font-weight:600; color:white; margin-bottom:5px; }
+.value-left p { font-size:0.82rem; color:rgba(255,255,255,0.6); line-height:1.6; max-width:580px; }
+.value-price { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--lavender); white-space:nowrap; padding-left:30px; }
+.value-total { display:flex; justify-content:space-between; align-items:center; padding:24px 0; margin-bottom:60px; border-top:2px solid rgba(255,255,255,0.2); }
+.value-total span { font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
+.value-total strong { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--lavender); }
+.price-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:60px; }
+.price-card { padding:36px 28px; border-radius:14px; border:1px solid rgba(255,255,255,0.15); text-align:center; background:rgba(255,255,255,0.04); transition:all 0.35s; position:relative; }
+.price-card.featured { background:rgba(187,63,149,0.18); border-color:var(--fuchsia); }
+.price-card .badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--fuchsia); color:white; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; padding:4px 14px; border-radius:20px; white-space:nowrap; }
+.price-card .plan-label { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:10px; display:block; }
+.price-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; color:white; margin-bottom:6px; font-weight:300; font-style:italic; }
+.price-card .price-main { font-family:'Cormorant Garamond',serif; font-size:3.2rem; color:var(--lavender); line-height:1; margin:16px 0 4px; }
+.price-card .price-main sup { font-size:1.2rem; }
+.price-card .price-sub { font-size:0.78rem; color:rgba(255,255,255,0.55); margin-bottom:10px; }
+.price-card .price-total { font-size:0.78rem; color:rgba(255,255,255,0.45); margin-bottom:26px; }
+.price-card .price-cta { display:block; padding:12px 20px; border:1.5px solid rgba(255,255,255,0.3); color:white; text-decoration:none; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; font-weight:600; transition:all 0.3s; border-radius:2px; }
+.price-card.featured .price-cta { background:var(--fuchsia); border-color:var(--fuchsia); }
+.price-card .price-cta:hover { background:var(--fuchsia); border-color:var(--fuchsia); }
+.price-card .save-badge { font-size:0.72rem; color:var(--lavender); margin-bottom:10px; }
+.pricing-note { font-size:0.82rem; line-height:1.85; color:rgba(255,255,255,0.6); padding:28px; background:rgba(255,255,255,0.04); border-radius:10px; border-left:3px solid var(--fuchsia); }
+
+/* ── S9: CLOSE + FAQ ── */
+.close-section { padding:120px 60px; background:var(--cream); }
+.close-inner { max-width:1100px; margin:0 auto; }
+.choices-grid { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin:60px 0 80px; }
+.choice-card { padding:40px 34px; border-radius:14px; }
+.choice-card.no { background:white; border:1px solid rgba(187,63,149,0.2); }
+.choice-card.yes { background:linear-gradient(135deg,var(--purple),var(--helio)); color:white; }
+.choice-label { font-size:0.62rem; letter-spacing:0.28em; text-transform:uppercase; margin-bottom:12px; display:block; opacity:0.7; }
+.choice-title { font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:24px; }
+.choice-list { list-style:none; }
+.choice-list li { font-size:0.86rem; line-height:1.8; margin-bottom:14px; padding-left:20px; position:relative; }
+.choice-list li::before { content:'•'; position:absolute; left:0; }
+.choice-card.yes .choice-list li::before { content:'✓'; color:var(--lavender); }
+.choice-card.no .choice-list li { color:var(--text); }
+.timeline-mini { margin-top:24px; }
+.timeline-mini .tl { display:flex; gap:14px; margin-bottom:12px; font-size:0.82rem; }
+.timeline-mini .tl strong { color:var(--lavender); min-width:60px; }
+.bonus-box { margin-top:50px; padding:32px; background:rgba(187,63,149,0.08); border-radius:14px; border:1px solid rgba(187,63,149,0.2); }
+.bonus-box h3 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--purple); margin-bottom:20px; }
+.bonus-item { display:flex; gap:14px; margin-bottom:16px; align-items:flex-start; font-size:0.88rem; line-height:1.75; color:var(--text); }
+.bonus-icon { font-size:1.1rem; flex-shrink:0; }
+.faq-section { margin-top:80px; }
+.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:50px; }
+.faq-item { background:white; padding:28px; border-radius:12px; border-left:3px solid var(--fuchsia); }
+.faq-q { font-weight:600; color:var(--purple); margin-bottom:12px; font-size:0.92rem; }
+.faq-a { font-size:0.84rem; line-height:1.8; color:var(--text); }
+.final-cta { margin-top:80px; padding:64px 50px; background:linear-gradient(135deg,var(--purple),var(--helio)); color:white; border-radius:16px; text-align:center; }
+.final-cta h2 { font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:300; margin-bottom:20px; }
+.final-cta p { font-size:0.92rem; line-height:1.85; margin-bottom:36px; opacity:0.92; max-width:680px; margin-left:auto; margin-right:auto; }
+.final-note { font-size:0.78rem; margin-top:24px; opacity:0.65; font-style:italic; }
+
+/* FOOTER */
+footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; }
+.footer-logo { font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; letter-spacing:0.12em; font-style:italic; }
+.footer-links { display:flex; gap:28px; }
+.footer-links a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.75rem; transition:color 0.3s; }
+.footer-links a:hover { color:var(--fuchsia); }
+.footer-copy { font-size:0.72rem; color:rgba(255,255,255,0.4); width:100%; }
+
+/* RESPONSIVE */
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .hero { grid-template-columns:1fr; }
+  .hero-photo-col { min-height:50vh; }
+  .hero-content { padding:40px 24px; }
+  .origin-section,.vision-section,.framework-section,.pain-section,.product-section,.proof-section,.pricing-section,.close-section { padding:60px 24px; }
+  .story-block,.framework-grid,.cases-grid,.choices-grid,.faq-grid,.price-cards,.journey-stages,.origin-stages,.differentiators { grid-template-columns:1fr; }
+  footer { flex-direction:column; text-align:center; padding:30px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Tập Gym Nội Tâm</div>
+  <div class="nav-links">
+    <a href="#origin">Câu Chuyện</a>
+    <a href="#framework">Hệ Thống 3R</a>
+    <a href="#proof">Bằng Chứng</a>
+    <a href="#pricing">Đăng Ký</a>
+  </div>
+</nav>
+
+<!-- S1: HERO -->
+<section class="hero">
+  <div class="hero-photo-col">
+    <div class="hero-photo">
+    <img src="Hero.jpg" alt="Hero"
+      >
+  </div>
+  </div>
+  <div class="hero-content">
+    <span class="section-tag">Hành Trình Chuyển Hóa Nội Tâm</span>
+    <h1 class="section-heading">Tập Gym<br><em>Nội Tâm</em></h1>
+    <div class="divider"></div>
+    <p class="body-text">Dành cho người phụ nữ đang thấy mình mắc kẹt trong vòng lặp cảm xúc, muốn xây nội lực vững vàng từ gốc và ngừng phản ứng vô thức — ngay cả khi nàng đã hiểu rất nhiều nhưng vẫn chưa thể thay đổi cách mình sống.</p>
+    <div class="hero-price-box">
+      <div>
+        <div class="hero-price-strike">Giá gốc: 1.099.000đ/tháng</div>
+        <div class="hero-price-sub">Giảm đến 25% cho hành trình dài hạn</div>
+      </div>
+      <div>
+        <div class="hero-price-main">~27K<sup>đ</sup></div>
+        <div class="hero-price-sub">mỗi ngày</div>
+      </div>
+    </div>
+    <a href="#pricing" class="cta-btn"><span>Mình Muốn Bắt Đầu Hành Trình Này →</span></a>
+  </div>
+</section>
+
+<!-- S2: ORIGIN STORY -->
+<section class="origin-section" id="origin">
+  <div class="origin-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:70px;">
+      <span class="section-tag">Câu Chuyện Người Sáng Lập</span>
+      <h2 class="section-heading">Tại Sao Có<br><em>Tập Gym Nội Tâm</em></h2>
+      <div class="divider" style="margin:22px auto;"></div>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-text">
+        <h3>1. TRƯỚC — "Mình Cũng Từng Ở Đó"</h3>
+        <p>Có một giai đoạn, Linh sống một cuộc đời mà nhìn từ bên ngoài, mọi thứ đều khá ổn. Công việc tốt, được tin tưởng, được làm việc với những người mà ai cũng nghĩ là "thành công". Trong tình yêu, Linh cũng luôn nghĩ mình biết mình cần gì — một mối quan hệ bình yên, một người đàn ông vững chãi.</p>
+        <p>Nhưng bên trong Linh thì khác. Có những ngày kết thúc vẫn tự hỏi: "Hôm nay mình thật sự đã làm được điều gì có ý nghĩa chưa?" Trong tình yêu, Linh luôn giữ mình ở một khoảng lưng chừng — không dám quá gần, nhưng cũng không rời đi.</p>
+        <h3 style="margin-top:30px;">2. ĐẤU TRANH — "Vòng Lặp Không Lối Ra"</h3>
+        <p>Linh là kiểu gắn bó né tránh — bên ngoài lạnh, bên trong lại rất cần kết nối. Linh đã nhận chiếc nhẫn cầu hôn đầu tiên… rồi trả lại. Đến chiếc nhẫn thứ hai, Linh ở lại — không hẳn vì yêu, mà vì sợ. Sợ rằng nếu rời đi, mình sẽ không gặp được ai thương mình như vậy nữa. Đổi người… nhưng câu chuyện không đổi.</p>
+      </div>
+      <div class="story-image">
+        <img src="ring2.jpg" alt="Chiếc nhẫn cầu hôn"
+          >
+      </div>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-text">
+        <h3>3. KHÁM PHÁ — "Bước Ngoặt Thật Sự"</h3>
+        <p>Bước ngoặt không đến từ việc gặp đúng người. Mà đến từ việc Linh dừng lại. Lần đầu tiên, Linh không chạy ra ngoài để tìm câu trả lời nữa. Linh quay vào bên trong.</p>
+        <p>Và Linh nhận ra: Không phải mình gặp sai người. Mà là mình đang mang một phiên bản chưa vững vàng của mình đi vào mọi lựa chọn. Mình không chọn từ sự rõ ràng, mà chọn từ nỗi sợ, từ những phản xạ vô thức.</p>
+        <h3 style="margin-top:30px;">4. SAU — "Phiên Bản Khác Đi Thật Sự"</h3>
+        <p>Từ đó, Linh bắt đầu một hành trình rất khác. Không phải để trở thành một phiên bản hoàn hảo hơn, mà là để trở nên nhất quán và vững vàng hơn với chính mình. Trong tình yêu, Linh không còn yêu trong trạng thái nửa nạc nửa mỡ, không còn cần ai đó để chứng minh giá trị của mình.</p>
+      </div>
+      <div class="story-text">
+        <h3>5. SỨ MỆNH — "Vì Sao Có Tập Gym Nội Tâm"</h3>
+        <p>Tập Gym Nội Tâm không ra đời vì Linh giỏi hơn ai. Nó ra đời vì Linh đã từng ở đúng nơi mà rất nhiều người đang đứng:</p>
+        <p>Biết rất nhiều… nhưng vẫn lặp lại. Muốn thay đổi… nhưng không biết bắt đầu từ đâu. Cố gắng rất nhiều… nhưng vẫn quay về cùng một vòng lặp cũ. Gặp anh A, anh B, anh C… nhưng cái lõi bên trong vẫn y chang.</p>
+        <p>Linh nhận ra rằng: <strong>Nội tâm cũng giống như cơ thể, không thể chỉ "hiểu" là thay đổi, mà cần được rèn luyện mỗi ngày.</strong> Và khi nàng thay đổi cách mình chọn, cuộc đời nàng tự thay đổi theo.</p>
+      </div>
+    </div>
+
+    <div class="origin-stages reveal">
+      <div class="stage-card"><div class="stage-num">1</div><div class="stage-title">TRƯỚC</div><div class="stage-desc">Cuộc sống ổn… nhưng bên trong rỗng tuếch</div></div>
+      <div class="stage-card"><div class="stage-num">2</div><div class="stage-title">ĐẤU TRANH</div><div class="stage-desc">Vòng lặp không lối ra, lặp đi lặp lại</div></div>
+      <div class="stage-card"><div class="stage-num">3</div><div class="stage-title">KHÁM PHÁ</div><div class="stage-desc">Dừng lại và quay vào bên trong</div></div>
+      <div class="stage-card"><div class="stage-num">4</div><div class="stage-title">SAU</div><div class="stage-desc">Vững vàng và nhất quán hơn với mình</div></div>
+      <div class="stage-card"><div class="stage-num">5</div><div class="stage-title">SỨ MỆNH</div><div class="stage-desc">Tập Gym Nội Tâm ra đời</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S3: FUTURE VISION -->
+<section class="vision-section" id="vision">
+  <div class="vision-inner">
+    <div class="reveal" style="margin-bottom:50px;">
+      <span class="section-tag">Tầm Nhìn Tương Lai</span>
+      <h2 class="section-heading">Khi Nàng Không Còn<br><em>Tự Dằn Vặt</em> Mình</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="reveal">
+      <p class="vision-text">Có những buổi tối, nàng không làm gì cả. Không nhắn tin, không gọi điện, cũng không đăng gì lên mạng. Nhưng đầu nàng thì không dừng lại. Nàng nằm đó và bắt đầu tua lại mọi thứ — từng cuộc trò chuyện, từng lần cãi nhau, từng khoảnh khắc mà nàng đã im lặng… hoặc lẽ ra nên im lặng.</p>
+      <p class="vision-text"><em>"Lúc đó mình có nói quá không?" "Hay tại mình đòi hỏi nhiều quá?" "Hay nếu mình bình tĩnh hơn một chút… thì mọi chuyện đã khác?"</em></p>
+      <p class="vision-text">Nàng nhận ra, nàng không chỉ nhớ họ. Nàng đang xét lại chính mình. Nàng đứng giữa hai chiều — một bên là nỗi buồn vì mất đi một người, một bên là cảm giác có thể chính mình là lý do khiến mọi thứ kết thúc. Và điều mệt nhất không phải là chia tay, mà là nàng không biết phải tin vào điều gì.</p>
+      <div class="vision-pull">Nhưng rồi, có một lúc, mọi thứ bắt đầu thay đổi. Không phải vì nàng quên, cũng không phải vì nàng hết đau. Mà vì nàng bắt đầu nhìn lại những gì đã xảy ra… một cách rõ hơn.</div>
+      <p class="vision-text">Có những lúc nàng nói nhiều… không phải vì nàng khó, mà vì nàng đang cố được hiểu. Có những lúc nàng giận… không phải vì nàng kiểm soát, mà vì nàng đang cảm thấy không an toàn. Có những lúc nàng "đòi hỏi"… nhưng thật ra nàng chỉ đang cần một điều rất cơ bản — được quan tâm.</p>
+      <div class="vision-pull"><strong>Lần đầu tiên, nàng thở ra được.</strong><br>Không phải vì mọi thứ ổn. Mà vì nàng không còn phải mang tất cả về phía mình nữa.</div>
+      <p class="vision-text">Đây không phải là một viễn cảnh xa vời. Đây là điều bắt đầu xảy ra khi nàng ngừng tự xử lý mọi thứ trong đầu, và bắt đầu học cách nhìn vào chính mình một cách có hệ thống — từng chút một, mỗi ngày.</p>
+    </div>
+  </div>
+</section>
+
+<!-- S4: CORE FRAMEWORK -->
+<section class="framework-section" id="framework">
+  <div class="framework-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:20px;">
+      <span class="section-tag">Hệ Thống Cốt Lõi</span>
+      <h2 class="section-heading">3R Framework —<br><em>Hệ Thống Giúp Nàng</em><br>Ngừng Lặp Lại</h2>
+      <div class="divider" style="margin:22px auto;"></div>
+    </div>
+    <p class="framework-intro reveal">Trong Tập Gym Nội Tâm, nàng không học cách "làm đúng". Nàng học cách thay đổi cách mình vận hành từ bên trong. Hệ thống này xoay quanh 3 bước rất đơn giản — nhưng nếu thiếu bất kỳ bước nào, nàng sẽ tiếp tục mắc kẹt.</p>
+    <div class="framework-grid">
+      <div class="fw-card reveal">
+        <h3>REGULATE</h3>
+        <h4>Điều Hòa</h4>
+        <p><strong>Nàng có dừng lại được không?</strong></p>
+        <p>Trước khi nàng hiểu được cảm xúc của mình, nàng cần có khả năng ở lại với nó mà không bị cuốn đi. Hầu hết mọi người khi bị trigger sẽ hoặc phản ứng ngay, hoặc cố đè nó xuống. Cả hai đều không phải là "làm chủ".</p>
+        <div class="example">Người nàng đang tìm hiểu rep chậm hơn. Đầu nàng bắt đầu chạy: "Họ đang chán mình à?" Nàng muốn nhắn thêm, muốn kiểm tra…</div>
+        <p class="miss">❌ Nếu thiếu: Nàng sẽ luôn phản ứng theo cảm xúc nhất thời — mọi thứ chỉ là hệ quả của phản xạ cũ.</p>
+      </div>
+      <div class="fw-card reveal">
+        <h3>REFLECT</h3>
+        <h4>Soi Chiếu</h4>
+        <p><strong>Nàng có thấy mình đang làm gì không?</strong></p>
+        <p>Khi đã dừng lại được, nàng mới bắt đầu nhìn vào bên trong. Không phải để phán xét. Mà để hiểu: "Thật ra mình đang bị cái gì điều khiển?"</p>
+        <div class="example">"Mình không chỉ đang khó chịu vì họ rep chậm." "Mình đang sợ bị bỏ rơi." "Mình đang cần họ xác nhận giá trị của mình."</div>
+        <p class="miss">❌ Nếu thiếu: Nàng sẽ tiếp tục nghĩ vấn đề nằm ở người kia. Đổi người… nhưng câu chuyện vẫn lặp lại.</p>
+      </div>
+      <div class="fw-card reveal">
+        <h3>REWIRE</h3>
+        <h4>Đổi Phản Xạ</h4>
+        <p><strong>Nàng có sống khác đi được không?</strong></p>
+        <p>Đây là bước hầu hết mọi người không làm được. Họ hiểu. Họ nhận ra. Nhưng vẫn hành động như cũ. Rewire là lúc nàng bắt đầu chọn một phản ứng khác — dù cảm xúc cũ vẫn còn.</p>
+        <div class="example">Trước: thấy khó chịu → nhắn thêm → kiểm soát tình huống.<br>Bây giờ: vẫn thấy urge đó, nhưng không hành động theo. Ở lại với cảm giác. Để nó đi qua.</div>
+        <p class="miss">❌ Nếu thiếu: "Mình hiểu hết rồi… mà sao mình vẫn vậy?"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S5: PAIN AGITATION -->
+<section class="pain-section" id="pain">
+  <div class="pain-inner">
+    <div class="reveal" style="margin-bottom:50px;">
+      <span class="section-tag">Nàng Đang Ở Đâu</span>
+      <h2 class="section-heading">Những Điều Nàng<br>Không Nói Ra… <em>Nhưng Ngày Nào Cũng Sống Cùng</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="reveal">
+      <div class="pain-block"><strong>Có thể nàng đang ở trong một mối quan hệ mà…</strong> không có gì thật sự sai, nhưng cũng không có gì đủ rõ để nàng yên tâm. Không có một lời cam kết cụ thể, mọi thứ cứ lưng chừng — và nàng cũng lưng chừng theo. Ở lại thì thấy thiếu, thấy bất an; rời đi thì lại thấy tiếc, thấy thương. Và thế là nàng cứ ở đó, trong một trạng thái không tên, ngày qua ngày.</div>
+      <div class="pain-block"><strong>Có thể nàng vừa đi qua một cuộc chia tay,</strong> nhưng điều khiến nàng mệt không chỉ là việc mất đi một người, mà là nàng không ngừng quay lại những gì đã xảy ra. Nàng không chỉ nhớ họ — nàng đang tự xét xử chính mình. Và cuối cùng… nàng chọn quay về phía trách bản thân, vì đó là thứ nàng quen làm nhất.</div>
+      <div class="pain-block"><strong>Có thể nàng nhận ra mọi thứ cứ lặp lại.</strong> Người khác đi, nhưng cảm giác vẫn y như cũ. Nàng hiểu mình đang overthinking, nàng biết mình đang bám, nàng thậm chí gọi tên được cảm xúc của mình — nhưng nàng vẫn không làm khác đi được.</div>
+      <div class="pain-block"><strong>Và có thể điều khiến nàng mệt nhất là:</strong> nàng đã cố rồi. Nàng đã đọc, đã học, đã hiểu bản thân mình hơn trước rất nhiều. Nhưng khi bước vào một tình huống thật, nàng vẫn quay lại đúng cách cũ. Không phải vì nàng không đủ thông minh — mà vì nàng đang cố thay đổi bằng hiểu biết, trong khi thứ điều khiển nàng lại nằm ở một tầng sâu hơn.</div>
+      <div class="pain-close">
+        <p><strong>Đúng không? Linh hiểu cảm giác đó. Vì Linh cũng từng ở đó.</strong></p>
+        <p style="margin-top:14px;">Thứ nàng thật sự đang thiếu là <strong>một hệ thống đủ rõ để nàng biết mình đang làm gì</strong> — thay vì chỉ cảm thấy. Một môi trường đủ an toàn. Và một người dẫn đường để nàng không tiếp tục mò mẫm trong chính nội tâm của mình.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S6: PRODUCT REVEAL -->
+<section class="product-section" id="product">
+  <div class="product-inner">
+    <div class="reveal" style="margin-bottom:50px;">
+      <span class="section-tag">Cơ Chế Hoạt Động</span>
+      <h2 class="section-heading">Tập Gym Nội Tâm<br><em>Hoạt Động Như Thế Nào?</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="reveal">
+      <p class="mechanism"><strong>Tập Gym Nội Tâm không phải là nơi để nàng học thêm kiến thức về bản thân.</strong> Đây là nơi nàng tập lại cách mình vận hành mỗi ngày — cho đến khi những gì nàng từng "hiểu" bắt đầu trở thành cách nàng thật sự sống.</p>
+      <p class="mechanism">Phần lớn chúng ta mắc kẹt không phải vì không nhận ra vấn đề, mà vì chỉ dừng lại ở việc "nhận ra". Vì nội tâm không thay đổi bằng một lần "hiểu ra". Nó chỉ thay đổi khi nàng <strong>lặp lại một cách phản ứng mới đủ lâu để hệ thần kinh học lại.</strong></p>
+      <div class="what-you-get">
+        <h3>Trong Gym Nội Tâm, Nàng Sẽ:</h3>
+        <ul class="get-list">
+          <li>Thực hành mỗi ngày với trục 3R: Điều hòa – Soi chiếu – Đổi phản xạ</li>
+          <li>Viết ra, nhìn ra và được phản hồi: Thay vì chỉ suy nghĩ quẩn quanh trong đầu</li>
+          <li>Đi qua chính tình huống thật của mình: Không phải ví dụ chung chung của ai khác</li>
+          <li>Có môi trường và người đồng hành: Giữ nàng ở lại ngay cả khi muốn bỏ cuộc</li>
+        </ul>
+      </div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:24px;">5 Tầng Chuyển Hóa</h3>
+      <div class="journey-stages">
+        <div class="j-stage"><h4>Tầng 1: NHÌN RA</h4><p>Nhận diện được trigger và phản xạ tự động của mình</p></div>
+        <div class="j-stage"><h4>Tầng 2: TÁCH RA</h4><p>Có khoảng lặng giữa cảm xúc và phản ứng</p></div>
+        <div class="j-stage"><h4>Tầng 3: LỰA CHỌN</h4><p>Làm chủ lựa chọn, không để phản xạ cũ dắt mũi</p></div>
+        <div class="j-stage"><h4>Tầng 4: THẤY GỐC</h4><p>Hiểu sâu về những kịch bản đang lặp lại</p></div>
+        <div class="j-stage"><h4>Tầng 5: DỪNG LẠI</h4><p>Tự do thật sự, không còn lặp lại vòng cũ</p></div>
+      </div>
+      <div class="differentiators" style="margin-top:60px;">
+        <div class="diff-card">
+          <h4>Story Preview — Nhìn Thẳng Vào Gốc Rễ</h4>
+          <p>Nàng không chỉ xử lý phần ngọn. Linh dẫn nàng đi sâu vào những trải nghiệm gia đình, những niềm tin cốt lõi và mô thức nàng tưởng là "tính cách" nhưng thật ra chỉ là phản xạ.</p>
+        </div>
+        <div class="diff-card">
+          <h4>Linh Đồng Hành Sát — Nàng Không Phải Tự Bơi</h4>
+          <p>Phần khó nhất không phải là "hiểu", mà là khi nàng kẹt và không biết mình sai ở đâu. Trong nhóm Zalo, Linh sẽ phản hồi trực tiếp theo chính tình huống của nàng.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S7: SOCIAL PROOF -->
+<section class="proof-section" id="proof">
+  <div class="proof-inner">
+    <div class="proof-header reveal">
+      <span class="section-tag">Bằng Chứng Chuyển Hóa</span>
+      <h2 class="section-heading">Những Người Đã Từng<br><em>Ở Đúng Nơi Nàng Đang Đứng</em></h2>
+      <div class="divider"></div>
+      <p style="font-size:0.85rem;color:var(--text);margin-bottom:0;">Đừng lầm tưởng rằng chỉ những người "ổn sẵn" mới có thể thay đổi. Những câu chuyện dưới đây bắt đầu từ những tầng sâu nhất của sự đổ vỡ, lo âu và tự nghi ngờ.</p>
+    </div>
+
+    <div class="cases-scroll-wrap" id="casesScroll">
+      <div class="cases-row">
+
+        <!-- Case 1: Chị D -->
+        <div class="case-card">
+          <span class="case-label">Case 1</span>
+          <h4>Chị D — Từ "Kẻ Săn Đuổi" Lo Âu Đến Sự Tự Tại</h4>
+          <p class="case-before">Chị D sống trong một mối quan hệ nghiệt ngã: Càng yêu, chị càng sợ bị bỏ rơi. Khi đối phương né tránh, chị lại càng gồng mình kiểm soát. <em>"Có những ngày, thời gian chị thấy ổn… chỉ tính bằng phút."</em></p>
+          <ul class="case-results">
+            <li>Không còn "vay mượn" sự an tâm bằng cách kiểm soát đối phương</li>
+            <li>Nhận diện chính xác lúc nào "đứa trẻ lo âu" bị kích hoạt</li>
+            <li>Thôi làm "kẻ đi săn" trong cuộc đuổi bắt tình cảm</li>
+          </ul>
+          <div class="case-quote">"Từng chút một, em đã cùng chị nhìn sâu vào từng 'bóng tối' bên trong chị… và ôm ấp chúng. Hành trình 'bò lên từ đáy' này… không còn quá khó như chị nghĩ."</div>
+        </div>
+
+        <!-- Case 2: Chị Ngân -->
+        <div class="case-card">
+          <span class="case-label">Case 2</span>
+          <h4>Chị Ngân — Từ "Nỗ Lực Bù Đắp" Đến Tự Nhận Diện Giá Trị</h4>
+          <p class="case-before">Từng mang nhãn dán "rối loạn lưỡng cực", chị Ngân sống với niềm tin khắc nghiệt: "Mình không bình thường, sẽ không ai yêu mình thật lòng đâu". Chị không sợ chia tay, chị chỉ sợ mình cố đến đâu cũng không đủ.</p>
+          <ul class="case-results">
+            <li>Bắt đầu biết cắm những "cột mốc" ranh giới cho tâm hồn mình</li>
+            <li>Dám lên tiếng cho nhu cầu bản thân thay vì chọn im lặng để được yêu</li>
+            <li>Sự tự tin mọc lên từ bên trong, không còn là món quà đi mượn từ người khác</li>
+          </ul>
+          <div class="case-quote">"Em tập cách nhận diện ranh giới, lên tiếng khi cần thiết. Biết được giá trị của mình là gì mà không cần người khác thừa nhận hay khen ngợi."</div>
+        </div>
+
+        <!-- Case 3: Chị My -->
+        <div class="case-card">
+          <span class="case-label">Case 3</span>
+          <h4>Chị My — Từ "Đóng Băng" Quan Sát Đến Dấn Thân Vào Thực Tại</h4>
+          <img src="My.jpg" alt="Chị My" class="case-img">
+          <p class="case-before">Chị My là người cầu toàn đến mức… không dám sống. Chị sợ công việc không xịn, sợ chọn sai, sợ bị đánh giá. Kết quả là chị đứng yên, nhìn cuộc đời trôi qua trong mớ suy nghĩ hỗn độn.</p>
+          <ul class="case-results">
+            <li>Dám làm, dám xin việc, dám bước vào nhịp sống thay vì chỉ đứng ngoài quan sát</li>
+            <li>Thôi chống lại "bóng tối" của mình để bắt đầu yêu lấy chính mình, kể cả khi lựa chọn sai</li>
+          </ul>
+          <div class="case-quote">"Từ hôm nay, mỗi khi tôi tự trách, tôi sẽ dừng lại. Tôi yêu chính mình, kể cả khi tôi không làm đúng mọi thứ…"</div>
+        </div>
+
+        <!-- Case 4: Chị Teresa -->
+        <div class="case-card">
+          <span class="case-label">Case 4</span>
+          <h4>Chị Teresa — Từ "Nội Tâm Bỏ Đói" Đến Sự Chuyển Hóa "Lấp Lánh"</h4>
+          <img src="Ngan.jpg" alt="Chị Teresa" class="case-img">
+          <p class="case-before">Chị Teresa bước vào hành trình với khao khát duy nhất: Có một nội tâm kiên định và những ranh giới lành mạnh. Chị từng bị kẹt trong vòng lặp vật vã của những cảm xúc bị bỏ đói bấy lâu.</p>
+          <ul class="case-results">
+            <li>Chỉ trong 14 ngày (ngày 50–64), biểu đồ nội tâm có sự bứt phá rõ rệt</li>
+            <li>Tìm thấy niềm vui tự thân, không còn đợi ai khen ngợi</li>
+            <li>Một nội tâm vững chãi đang vươn tới cuộc đời rực rỡ</li>
+          </ul>
+          <div class="case-quote">"Vì phiên bản rạng ngời, lung linh, lấp lánh đang chờ mình chạm tới, thì không có lý do gì để đứng mãi cả. Lòng mình như đang hân hoan nhảy múa."</div>
+        </div>
+
+        <!-- Case 5: Chị M cốt thỏ -->
+        <div class="case-card">
+          <span class="case-label">Case 5</span>
+          <h4>Chị M — Từ "Cốt Thỏ" Sợ Hãi Đến Người Phụ Nữ Tự Cầm Lái Cuộc Đời</h4>
+          <p class="case-before">Chị M đến với Gym Nội Tâm trong trạng thái chị tự gọi là "cốt thỏ": Dễ giật mình, dễ rút lui và luôn mang theo niềm tin: "Mày không làm được đâu. Ở nhà thì hơn." Mỗi khi khó khăn, chị lại chọn chạy trốn — để rồi bên trong vẫn rỗng tuếch.</p>
+          <ul class="case-results">
+            <li>Học cách ngồi lại với chính mình thay vì tìm nguồn xoa dịu bên ngoài</li>
+            <li>Tự ôm ấp đứa trẻ bên trong — không còn đợi sự vỗ về từ ai</li>
+            <li>Dám xuất hiện, dám nói, dám thể hiện bản thân một cách chân thật</li>
+            <li>Làm chủ "nhiên liệu hạnh phúc" — không còn phụ thuộc vào sự công nhận của bất kỳ ai</li>
+          </ul>
+          <div class="case-quote">"Hóa ra, tự do đích thực là tự do trước mọi nỗi sợ. Mình tập nhìn chính mình với đôi mắt bao dung, bớt dần sự lệ thuộc vào nguồn xoa dịu bên ngoài."</div>
+        </div>
+
+        <!-- Case 6: Bé Nhung -->
+        <div class="case-card">
+          <span class="case-label">Case 6</span>
+          <h4>Bé Nhung — Từ "Cô Bé Núp Lùm" Đến Phép Màu Hiện Diện</h4>
+          <p class="case-before">Nhung bước vào hành trình với thói quen "núp lùm cây" — âm thầm quan sát vì sự tự ti bám rễ quá sâu. Em từng kìm nén cảm xúc trong thời gian dài, khiến trái tim dần trở nên nguội lạnh và xa cách với những người thương yêu nhất.</p>
+          <ul class="case-results">
+            <li>Biến cảm xúc thành "Kim cương" — nỗi buồn, ghen tị, giận dữ giờ là công cụ soi sáng mình</li>
+            <li>Khi mẹ khóc vì mệt mỏi, Nhung bình tĩnh lau nước mắt, an ủi và trêu cho mẹ cười</li>
+            <li>Khoảng cách xa cách giữa hai mẹ con được xóa nhòa nhờ sự hiện diện đầy yêu thương</li>
+          </ul>
+          <div class="case-quote">"Nỗi sợ không định nghĩa mình là ai, nỗi sợ tôi luyện mình. Em không còn từ chối những điều tốt đẹp nữa, vì em nhận ra mình vốn dĩ đã xứng đáng rồi. Ta chính là phép màu của cuộc đời mình."</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="cases-footer reveal">
+      <p><strong>Điểm chung của họ là gì?</strong> Họ không bắt đầu với sự tự tin hay một phiên bản "ổn". Họ bắt đầu từ sự mông lung, tự nghi ngờ và những vòng lặp bế tắc tưởng chừng không lối thoát.</p>
+      <p style="margin-top:14px;">Nhưng họ có một điểm khác biệt duy nhất: <strong>Họ không tiếp tục làm một mình.</strong> Nếu những người từng ở "dưới đáy" đều có thể đứng vững, thì câu hỏi dành cho nàng là: Nàng có cho phép mình một cơ hội để thực hiện cuộc chuyển hóa tương tự không? ✨</p>
+    </div>
+  </div>
+</section>
+
+<!-- S8: PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="reveal" style="margin-bottom:50px;">
+      <span class="section-tag">Section 08 — Offer Stack &amp; Pricing</span>
+      <h2 class="section-heading">Giá Trị &amp;<br><em>Đầu Tư Của Bạn</em></h2>
+      <div class="divider"></div>
+    </div>
+    <p class="pricing-intro reveal">Đây không phải một khóa học để bạn "xem thử". Đây là một hệ sinh thái bạn bước vào để tái cấu trúc cách mình vận hành.</p>
+
+    <div class="value-stack reveal">
+      <div class="value-row">
+        <div class="value-left"><h4>02 Buổi Zoom Group Coaching mỗi tháng</h4><p>Linh trực tiếp tháo gỡ vấn đề theo đúng tình huống thực tế của bạn</p></div>
+        <div class="value-price">2.000.000 đ/tháng</div>
+      </div>
+      <div class="value-row">
+        <div class="value-left"><h4>Hệ Thống Story Preview</h4><p>Công cụ soi chiếu đi thẳng vào gốc rễ mô thức (trước đây chỉ dành cho đồng hành cá nhân)</p></div>
+        <div class="value-price">5.000.000 đ/tháng</div>
+      </div>
+      <div class="value-row">
+        <div class="value-left"><h4>Hệ Thống 3R &amp; Bài Tập Thực Hành Mỗi Ngày</h4><p>Công cụ giúp bạn thật sự thay đổi phản xạ thần kinh, không chỉ hiểu lý thuyết</p></div>
+        <div class="value-price">Không thể định giá</div>
+      </div>
+      <div class="value-row">
+        <div class="value-left"><h4>Group Zalo có Linh Đồng Hành Sát</h4><p>Được phản hồi ngay khi bạn đang gặp rắc rối, không phải chờ đợi trong cô độc</p></div>
+        <div class="value-price">Vô giá</div>
+      </div>
+    </div>
+
+    <div class="value-total reveal">
+      <span>Tổng Giá Trị Tối Thiểu</span>
+      <strong>7.000.000 đ/tháng</strong>
+    </div>
+
+    <div class="price-cards">
+      <div class="price-card reveal">
+        <span class="plan-label">Gói Cơ Bản</span>
+        <h4>Từng Tháng</h4>
+        <div class="price-main"><sup>đ</sup>1.099<span style="font-size:1.2rem;">.000</span></div>
+        <div class="price-sub">/ tháng</div>
+        <a href="mailto:linh@tapgymnoitam.com?subject=Đăng ký Gói Từng Tháng" class="price-cta">Chọn Gói Này</a>
+      </div>
+      <div class="price-card featured reveal">
+        <span class="badge">+ Phổ Biến Nhất</span>
+        <span class="plan-label">Tiết Kiệm Hơn</span>
+        <h4>6 Tháng</h4>
+        <div class="price-main"><sup>đ</sup>879<span style="font-size:1.2rem;">.000</span></div>
+        <div class="price-sub">/ tháng</div>
+        <div class="price-total">Tổng 5.275.000đ</div>
+        <a href="mailto:linh@tapgymnoitam.com?subject=Đăng ký Gói 6 Tháng" class="price-cta">Chọn Gói Này</a>
+      </div>
+      <div class="price-card reveal">
+        <span class="plan-label">Tối Ưu Nhất</span>
+        <h4>12 Tháng</h4>
+        <div class="price-main"><sup>đ</sup>825<span style="font-size:1.2rem;">.000</span></div>
+        <div class="price-sub">/ tháng</div>
+        <div class="price-total">Tổng 9.891.000đ</div>
+        <div class="save-badge">Tiết kiệm tối đa</div>
+        <a href="mailto:linh@tapgymnoitam.com?subject=Đăng ký Gói 12 Tháng" class="price-cta">Chọn Gói Này</a>
+      </div>
+    </div>
+
+    <div class="pricing-note reveal">
+      <strong>Cam kết hoàn tiền từ Linh:</strong> Nếu nàng thực hành đầy đủ theo hướng dẫn, chủ động đặt câu hỏi khi gặp khó khăn, nhưng sau một thời gian vẫn không thấy bất kỳ chuyển biến nào trong tâm thức — Linh sẽ hoàn tiền 100%. Vì nếu nàng đã thật sự nỗ lực mà vẫn không thay đổi, thì vấn đề không còn nằm ở nàng nữa.
+    </div>
+  </div>
+</section>
+
+<!-- S9: CLOSE + FAQ -->
+<section class="close-section" id="faq">
+  <div class="close-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:60px;">
+      <span class="section-tag">Đã Đến Lúc Ngừng Trì Hoãn Hạnh Phúc Của Chính Nàng</span>
+      <h2 class="section-heading">Nàng Sẽ<br><em>Chọn Gì?</em></h2>
+      <div class="divider" style="margin:22px auto;"></div>
+    </div>
+    <div class="choices-grid">
+      <div class="choice-card no reveal">
+        <span class="choice-label">Lựa Chọn 1 — Tiếp Tục Hệ Điều Hành Cũ</span>
+        <div class="choice-title">Không làm gì cả...</div>
+        <ul class="choice-list">
+          <li>Chấp nhận những mối quan hệ "lửng lơ": Không đủ tệ để rời đi, nhưng không bao giờ đủ để thấy yên lòng</li>
+          <li>Để tâm trí bị bào mòn bởi overthinking mỗi khi có biến động nhỏ</li>
+          <li>Hiểu thấu vấn đề của mình… nhưng khi đối diện thực tế vẫn phản ứng y hệt như cũ</li>
+          <li>3 tháng hay 1 năm nữa, kịch bản cũ vẫn sẽ lặp lại nếu nàng không thay đổi "bộ mã nguồn" bên trong</li>
+        </ul>
+      </div>
+      <div class="choice-card yes reveal">
+        <span class="choice-label">Lựa Chọn 2 — Quẩy Cùng Gym Nội Tâm</span>
+        <div class="choice-title">Nàng chỉ cần đủ khao khát để bắt đầu...</div>
+        <ul class="choice-list">
+          <li>14 ngày đầu: Nhìn thấu những mô thức ẩn giấu, "vạch mặt" kẻ mạo danh đang dắt mũi nàng</li>
+          <li>30 ngày: Làm chủ "khoảng dừng" quý giá. Cảm xúc vẫn ở đó, nhưng không còn bị nó cuốn trôi</li>
+          <li>60–90 ngày: Dừng hẳn những hành động gây tổn thương cho chính mình. Tận hưởng sự vững chãi và tự tại</li>
+        </ul>
+        <div class="timeline-mini">
+          <div class="tl"><strong>🎁 Bonus 1</strong><span>Hệ thống Story Preview — vốn chỉ dành cho coaching 1:1 giá 5 triệu/tháng</span></div>
+          <div class="tl"><strong>🎁 Bonus 2</strong><span>Đặc quyền kết nối Zalo 24/7 — Linh trực tiếp tháo gỡ từng "case" thật</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-section reveal">
+      <h2 class="section-heading" style="text-align:center;">Những Câu Hỏi<br><em>Nàng Đang Trăn Trở</em></h2>
+      <div class="divider" style="margin:22px auto;"></div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-q">Mình sợ bản thân không đủ kỷ luật để đi hết hành trình?</div>
+          <p class="faq-a">Nàng không thiếu kỷ luật, nàng chỉ đang thiếu một Hệ thống. Gym Nội Tâm tạo ra "môi trường có lực đẩy", nơi Linh và đội ngũ sẽ luôn hiện diện và giữ nàng ở lại với chính mình ngay cả những lúc muốn bỏ cuộc nhất.</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Mình đã học rất nhiều rồi, sợ lần này cũng không thay đổi được?</div>
+          <p class="faq-a">Nàng đang mắc kẹt trong bẫy "Hiểu biết về nỗi đau". Tại đây, Linh không trao thêm kiến thức để cất vào kho. Nàng thay đổi bằng cách tập lại cách phản ứng mới, cho đến khi sự vững chãi trở thành bản năng tự nhiên.</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Nếu mình thay đổi, liệu mối quan hệ hiện tại có tan vỡ không?</div>
+          <p class="faq-a">Một mối quan hệ chỉ bền vững khi dựa trên sự rõ ràng, không phải dựa trên sự chịu đựng. Khi nàng vững chãi, nếu người kia thực sự là người bạn đồng hành dành cho nàng, họ chắc chắn sẽ được hưởng lợi từ sự thay đổi đó.</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Đây có phải là một liệu pháp chữa lành nhanh không?</div>
+          <p class="faq-a">Không. Đây là hành trình rèn luyện để xây lại "hệ cơ bắp" nội tâm. Cũng giống như xây nhà, cần thời gian để làm móng thật vững. Đổi lại, kết quả là sự tự tại thật sự — thứ không một ai hay biến cố nào có thể lấy đi.</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Ngân sách của mình có hạn, liệu có đáng không?</div>
+          <p class="faq-a">Hãy hỏi mình: Cái giá của việc sống thêm một năm với cùng một nỗi đau cũ là bao nhiêu? Chỉ 27.000 VNĐ mỗi ngày — bằng giá một ly cà phê — để đầu tư cho hạnh phúc trọn đời.</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Nếu mình thực sự nỗ lực mà vẫn không thấy hiệu quả?</div>
+          <p class="faq-a">Linh cam kết: Nếu nàng đi đúng lộ trình, thực hiện các bài tập và chủ động tháo gỡ cùng Linh nhưng tâm thức vẫn hoàn toàn đứng yên — Linh sẽ hoàn trả học phí 100%. Linh không bán khóa học, Linh trao giải pháp.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="final-cta reveal">
+      <h2>Bạn không cần phải hoàn hảo<br>để bắt đầu.</h2>
+      <p>Điều nàng cần lúc này không phải là một phép màu, mà là một quyết định. Quyết định đủ thành thật để nhìn vào chính mình và đủ quyết liệt để nói "KHÔNG" với những nỗi đau cũ. Nếu nàng đã đọc đến tận những dòng cuối cùng này, Linh tin là trái tim nàng đã có câu trả lời rồi.</p>
+      <a href="mailto:linh@tapgymnoitam.com?subject=Tôi Chọn Chuyển Hóa" class="cta-btn"><span>Tôi Chọn Chuyển Hóa — Đăng Ký Ngay Bây Giờ →</span></a>
+      <p class="final-note">Ưu đãi tặng kèm Story Preview chỉ dành cho các nàng quyết định sớm trước khi hệ thống khóa sổ</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Tập Gym Nội Tâm · Linh</div>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">Zalo</a>
+    <a href="#">Email</a>
+  </div>
+  <p class="footer-copy">© 2025 Tập Gym Nội Tâm — Được tạo ra với yêu thương và chủ đích</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Drag to scroll for cases
+const scroll = document.getElementById('casesScroll');
+let isDown = false, startX, scrollLeft;
+scroll.addEventListener('mousedown', e => { isDown=true; scroll.classList.add('active'); startX=e.pageX-scroll.offsetLeft; scrollLeft=scroll.scrollLeft; });
+scroll.addEventListener('mouseleave', () => { isDown=false; });
+scroll.addEventListener('mouseup', () => { isDown=false; });
+scroll.addEventListener('mousemove', e => { if(!isDown) return; e.preventDefault(); const x=e.pageX-scroll.offsetLeft; scroll.scrollLeft=scrollLeft-(x-startX)*1.5; });
+</script>
+</body>
+</html>
