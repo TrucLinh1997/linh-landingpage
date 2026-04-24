@@ -36,6 +36,22 @@ nav {
 .nav-links a { font-size:0.67rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--cadet); text-decoration:none; margin-left:30px; transition:color 0.3s; font-weight:500; }
 .nav-links a:hover { color:var(--fuchsia); }
 
+/* Hamburger */
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+.hamburger span { display:block; width:22px; height:2px; background:var(--cadet); transition:all 0.35s; border-radius:2px; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+.mobile-nav {
+  display:none; position:fixed; top:57px; left:0; right:0; z-index:99;
+  background:rgba(250,249,247,0.98); backdrop-filter:blur(20px);
+  padding:24px 28px 28px; flex-direction:column; gap:20px;
+  border-bottom:1px solid rgba(187,63,149,0.12);
+}
+.mobile-nav.open { display:flex; }
+.mobile-nav a { font-size:0.75rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--cadet); text-decoration:none; font-weight:500; padding:8px 0; border-bottom:1px solid rgba(187,63,149,0.08); }
+
 /* SHARED */
 .section-tag { font-size:0.58rem; letter-spacing:0.38em; text-transform:uppercase; color:var(--helio); display:block; margin-bottom:14px; }
 .section-heading { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:300; line-height:1.18; color:var(--dark); }
@@ -56,7 +72,20 @@ nav {
 .reveal { opacity:0; transform:translateY(24px); transition:all 0.65s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 
-/* ── S1: HERO ── */
+/* FLOATING CTA */
+.floating-cta {
+  position:fixed; bottom:28px; right:28px; z-index:98;
+  padding:14px 28px; background:var(--fuchsia); color:white;
+  border:none; cursor:pointer; border-radius:50px;
+  font-family:'Raleway',sans-serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; font-weight:700;
+  box-shadow:0 8px 28px rgba(187,63,149,0.45);
+  transition:all 0.35s; display:flex; align-items:center; gap:8px;
+  opacity:0; transform:translateY(20px);
+}
+.floating-cta.show { opacity:1; transform:translateY(0); }
+.floating-cta:hover { background:var(--purple); transform:translateY(-2px); }
+
+/* S1: HERO */
 .hero {
   min-height:100vh; display:grid; grid-template-columns:1.15fr 0.85fr;
   padding-top:56px; overflow:hidden;
@@ -64,11 +93,10 @@ nav {
 .hero-photo-col { position:relative; overflow:hidden; min-height:600px; }
 .hero-photo { position:absolute; inset:0; overflow:hidden; }
 .hero-photo img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
-.hero-photo::after { content:''; position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, var(--white) 100%); pointer-events:none; }
-}
 .hero-photo::after {
   content:''; position:absolute; inset:0;
   background:linear-gradient(to right, transparent 60%, var(--white) 100%);
+  pointer-events:none;
 }
 .hero-content { display:flex; flex-direction:column; justify-content:center; padding:80px 60px 80px 50px; }
 .hero-price-box {
@@ -81,7 +109,7 @@ nav {
 .hero-price-main sup { font-size:1rem; }
 .hero-price-sub { font-size:0.75rem; color:var(--text); line-height:1.5; }
 
-/* ── S2: ORIGIN STORY ── */
+/* S2: ORIGIN STORY */
 .origin-section { padding:120px 60px; background:var(--cream); }
 .origin-inner { max-width:1100px; margin:0 auto; }
 .story-block { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; margin-bottom:90px; }
@@ -95,7 +123,7 @@ nav {
 .stage-title { font-size:0.78rem; font-weight:700; color:var(--purple); margin-bottom:6px; letter-spacing:0.05em; }
 .stage-desc { font-size:0.75rem; line-height:1.65; color:var(--text); }
 
-/* ── S3: FUTURE VISION ── */
+/* S3: FUTURE VISION */
 .vision-section { padding:120px 60px; background:white; }
 .vision-inner { max-width:880px; margin:0 auto; }
 .vision-text { font-size:0.93rem; line-height:2; color:var(--text); margin-bottom:24px; }
@@ -106,7 +134,7 @@ nav {
   font-size:0.95rem; line-height:1.9; color:var(--purple); font-style:italic;
 }
 
-/* ── S4: FRAMEWORK ── */
+/* S4: FRAMEWORK */
 .framework-section { padding:120px 60px; background:var(--cream); }
 .framework-inner { max-width:1100px; margin:0 auto; }
 .framework-intro { font-size:0.9rem; line-height:1.95; color:var(--text); max-width:780px; margin:0 auto 70px; text-align:center; }
@@ -118,7 +146,7 @@ nav {
 .fw-card .example { background:var(--light); padding:14px 16px; border-radius:8px; font-size:0.82rem; line-height:1.7; color:var(--text); font-style:italic; margin:16px 0; }
 .fw-card .miss { font-size:0.8rem; color:var(--helio); font-weight:600; margin-top:14px; }
 
-/* ── S5: PAIN ── */
+/* S5: PAIN */
 .pain-section { padding:120px 60px; background:white; }
 .pain-inner { max-width:900px; margin:0 auto; }
 .pain-block { padding:28px 32px; background:var(--light); border-radius:12px; margin-bottom:24px; font-size:0.92rem; line-height:1.95; color:var(--text); }
@@ -127,7 +155,7 @@ nav {
 .pain-close p { font-size:0.92rem; line-height:1.85; color:var(--text); }
 .pain-close strong { color:var(--purple); }
 
-/* ── S6: PRODUCT ── */
+/* S6: PRODUCT */
 .product-section { padding:120px 60px; background:linear-gradient(160deg,var(--purple),var(--helio)); color:white; }
 .product-inner { max-width:1100px; margin:0 auto; }
 .product-section .section-heading { color:white; }
@@ -150,7 +178,7 @@ nav {
 .diff-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--lavender); margin-bottom:14px; }
 .diff-card p { font-size:0.88rem; line-height:1.85; color:rgba(255,255,255,0.85); }
 
-/* ── S7: SOCIAL PROOF ── */
+/* S7: SOCIAL PROOF */
 .proof-section { padding:120px 0 120px 60px; background:var(--cream); overflow:hidden; }
 .proof-inner { max-width:100%; }
 .proof-header { max-width:1040px; margin:0 auto 0 0; padding-right:60px; }
@@ -173,7 +201,7 @@ nav {
 .cases-footer p { font-size:0.92rem; line-height:1.9; color:var(--text); }
 .cases-footer strong { color:var(--purple); }
 
-/* ── S8: PRICING ── */
+/* S8: PRICING */
 .pricing-section { padding:120px 60px; background:var(--dark); color:white; }
 .pricing-inner { max-width:1100px; margin:0 auto; }
 .pricing-section .section-heading { color:white; }
@@ -181,10 +209,7 @@ nav {
 .pricing-section .divider { background:linear-gradient(to right,var(--lavender),transparent); }
 .pricing-intro { font-size:0.9rem; line-height:1.9; color:rgba(255,255,255,0.75); max-width:700px; margin-bottom:60px; }
 .value-stack { margin-bottom:60px; }
-.value-row {
-  display:flex; justify-content:space-between; align-items:flex-start;
-  padding:22px 0; border-bottom:1px solid rgba(255,255,255,0.1);
-}
+.value-row { display:flex; justify-content:space-between; align-items:flex-start; padding:22px 0; border-bottom:1px solid rgba(255,255,255,0.1); }
 .value-row:last-child { border-bottom:none; }
 .value-left h4 { font-size:0.92rem; font-weight:600; color:white; margin-bottom:5px; }
 .value-left p { font-size:0.82rem; color:rgba(255,255,255,0.6); line-height:1.6; max-width:580px; }
@@ -202,13 +227,13 @@ nav {
 .price-card .price-main sup { font-size:1.2rem; }
 .price-card .price-sub { font-size:0.78rem; color:rgba(255,255,255,0.55); margin-bottom:10px; }
 .price-card .price-total { font-size:0.78rem; color:rgba(255,255,255,0.45); margin-bottom:26px; }
-.price-card .price-cta { display:block; padding:12px 20px; border:1.5px solid rgba(255,255,255,0.3); color:white; text-decoration:none; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; font-weight:600; transition:all 0.3s; border-radius:2px; }
+.price-card .price-cta { display:block; padding:12px 20px; border:1.5px solid rgba(255,255,255,0.3); color:white; text-decoration:none; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; font-weight:600; transition:all 0.3s; border-radius:2px; cursor:pointer; background:transparent; width:100%; font-family:'Raleway',sans-serif; }
 .price-card.featured .price-cta { background:var(--fuchsia); border-color:var(--fuchsia); }
 .price-card .price-cta:hover { background:var(--fuchsia); border-color:var(--fuchsia); }
 .price-card .save-badge { font-size:0.72rem; color:var(--lavender); margin-bottom:10px; }
 .pricing-note { font-size:0.82rem; line-height:1.85; color:rgba(255,255,255,0.6); padding:28px; background:rgba(255,255,255,0.04); border-radius:10px; border-left:3px solid var(--fuchsia); }
 
-/* ── S9: CLOSE + FAQ ── */
+/* S9: CLOSE + FAQ */
 .close-section { padding:120px 60px; background:var(--cream); }
 .close-inner { max-width:1100px; margin:0 auto; }
 .choices-grid { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin:60px 0 80px; }
@@ -225,10 +250,6 @@ nav {
 .timeline-mini { margin-top:24px; }
 .timeline-mini .tl { display:flex; gap:14px; margin-bottom:12px; font-size:0.82rem; }
 .timeline-mini .tl strong { color:var(--lavender); min-width:60px; }
-.bonus-box { margin-top:50px; padding:32px; background:rgba(187,63,149,0.08); border-radius:14px; border:1px solid rgba(187,63,149,0.2); }
-.bonus-box h3 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--purple); margin-bottom:20px; }
-.bonus-item { display:flex; gap:14px; margin-bottom:16px; align-items:flex-start; font-size:0.88rem; line-height:1.75; color:var(--text); }
-.bonus-icon { font-size:1.1rem; flex-shrink:0; }
 .faq-section { margin-top:80px; }
 .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:50px; }
 .faq-item { background:white; padding:28px; border-radius:12px; border-left:3px solid var(--fuchsia); }
@@ -247,16 +268,50 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
 .footer-links a:hover { color:var(--fuchsia); }
 .footer-copy { font-size:0.72rem; color:rgba(255,255,255,0.4); width:100%; }
 
+/* MODAL */
+.modal-overlay { display:none; position:fixed; inset:0; z-index:200; background:rgba(28,10,30,0.72); backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:20px; }
+.modal-overlay.open { display:flex; }
+.modal-box { background:var(--white); border-radius:20px; width:100%; max-width:520px; padding:52px 44px 44px; position:relative; max-height:92vh; overflow-y:auto; animation:modalIn 0.38s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes modalIn { from { opacity:0; transform:scale(0.88) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+.modal-close { position:absolute; top:18px; right:20px; width:36px; height:36px; background:none; border:none; cursor:pointer; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--helio); font-size:1.3rem; }
+.modal-close:hover { background:rgba(187,63,149,0.1); }
+.modal-tag { font-size:0.58rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--helio); display:block; margin-bottom:10px; }
+.modal-title { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--dark); line-height:1.2; margin-bottom:6px; }
+.modal-title em { font-style:italic; color:var(--fuchsia); }
+.modal-sub { font-size:0.82rem; color:var(--text); margin-bottom:32px; line-height:1.7; }
+.modal-divider { width:40px; height:2px; background:linear-gradient(to right,var(--fuchsia),transparent); margin:16px 0 28px; }
+.form-group { margin-bottom:20px; }
+.form-group label { display:block; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--helio); margin-bottom:8px; font-weight:600; }
+.form-group input, .form-group select, .form-group textarea { width:100%; padding:13px 16px; border:1.5px solid rgba(107,71,115,0.2); border-radius:8px; background:var(--light); color:var(--dark); font-family:'Raleway',sans-serif; font-size:0.88rem; outline:none; transition:border-color 0.25s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--fuchsia); box-shadow:0 0 0 3px rgba(187,63,149,0.1); }
+.form-group select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B4773' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; cursor:pointer; }
+.form-group textarea { min-height:90px; resize:vertical; }
+.form-submit { width:100%; padding:16px; background:var(--purple); color:white; border:none; cursor:pointer; font-family:'Raleway',sans-serif; font-size:0.72rem; letter-spacing:0.25em; text-transform:uppercase; font-weight:700; border-radius:8px; transition:all 0.35s; margin-top:8px; position:relative; overflow:hidden; }
+.form-submit::before { content:''; position:absolute; inset:0; background:var(--fuchsia); transform:translateX(-100%); transition:transform 0.35s; }
+.form-submit span { position:relative; z-index:1; }
+.form-submit:hover::before { transform:translateX(0); }
+.form-submit:disabled { opacity:0.65; cursor:not-allowed; }
+.form-note { font-size:0.72rem; color:var(--helio); text-align:center; margin-top:16px; line-height:1.6; font-style:italic; }
+.form-success { display:none; text-align:center; padding:20px 0; }
+.form-success .success-icon { font-size:3rem; margin-bottom:16px; }
+.form-success h3 { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--purple); margin-bottom:10px; }
+.form-success p { font-size:0.88rem; line-height:1.8; color:var(--text); }
+
 /* RESPONSIVE */
 @media (max-width:768px) {
   nav { padding:12px 20px; }
   .nav-links { display:none; }
+  .hamburger { display:flex; }
   .hero { grid-template-columns:1fr; }
   .hero-photo-col { min-height:50vh; }
   .hero-content { padding:40px 24px; }
   .origin-section,.vision-section,.framework-section,.pain-section,.product-section,.proof-section,.pricing-section,.close-section { padding:60px 24px; }
-  .story-block,.framework-grid,.cases-grid,.choices-grid,.faq-grid,.price-cards,.journey-stages,.origin-stages,.differentiators { grid-template-columns:1fr; }
+  .story-block,.framework-grid,.choices-grid,.faq-grid,.price-cards,.journey-stages,.origin-stages,.differentiators { grid-template-columns:1fr; }
   footer { flex-direction:column; text-align:center; padding:30px 20px; }
+  .floating-cta { bottom:16px; right:16px; padding:12px 20px; font-size:0.62rem; }
+  .modal-box { padding:40px 24px 32px; }
+  .proof-section { padding:60px 0 60px 24px; }
+  .cases-footer { margin:40px 24px 0 0; }
 }
 </style>
 </head>
@@ -271,15 +326,27 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
     <a href="#proof">Bằng Chứng</a>
     <a href="#pricing">Đăng Ký</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#origin" onclick="closeMobileNav()">Câu Chuyện</a>
+  <a href="#framework" onclick="closeMobileNav()">Hệ Thống 3R</a>
+  <a href="#proof" onclick="closeMobileNav()">Bằng Chứng</a>
+  <a href="#pricing" onclick="closeMobileNav()">Đăng Ký</a>
+</div>
+
+<!-- Floating CTA -->
+<button class="floating-cta" id="floatingCta" onclick="openModal('Nút nổi')">✨ Đăng ký ngay</button>
 
 <!-- S1: HERO -->
 <section class="hero">
   <div class="hero-photo-col">
     <div class="hero-photo">
-    <img src="Hero.jpg" alt="Hero"
-      >
-  </div>
+      <img src="Hero.jpg" alt="Hero">
+    </div>
   </div>
   <div class="hero-content">
     <span class="section-tag">Hành Trình Chuyển Hóa Nội Tâm</span>
@@ -296,7 +363,7 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
         <div class="hero-price-sub">mỗi ngày</div>
       </div>
     </div>
-    <a href="#pricing" class="cta-btn"><span>Mình Muốn Bắt Đầu Hành Trình Này →</span></a>
+    <button class="cta-btn" onclick="openModal('Hero')"><span>Mình Muốn Bắt Đầu Hành Trình Này →</span></button>
   </div>
 </section>
 
@@ -308,7 +375,6 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
       <h2 class="section-heading">Tại Sao Có<br><em>Tập Gym Nội Tâm</em></h2>
       <div class="divider" style="margin:22px auto;"></div>
     </div>
-
     <div class="story-block reveal">
       <div class="story-text">
         <h3>1. TRƯỚC — "Mình Cũng Từng Ở Đó"</h3>
@@ -318,11 +384,9 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
         <p>Linh là kiểu gắn bó né tránh — bên ngoài lạnh, bên trong lại rất cần kết nối. Linh đã nhận chiếc nhẫn cầu hôn đầu tiên… rồi trả lại. Đến chiếc nhẫn thứ hai, Linh ở lại — không hẳn vì yêu, mà vì sợ. Sợ rằng nếu rời đi, mình sẽ không gặp được ai thương mình như vậy nữa. Đổi người… nhưng câu chuyện không đổi.</p>
       </div>
       <div class="story-image">
-        <img src="ring2.jpg" alt="Chiếc nhẫn cầu hôn"
-          >
+        <img src="ring2.jpg" alt="Chiếc nhẫn cầu hôn">
       </div>
     </div>
-
     <div class="story-block reveal">
       <div class="story-text">
         <h3>3. KHÁM PHÁ — "Bước Ngoặt Thật Sự"</h3>
@@ -338,7 +402,6 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
         <p>Linh nhận ra rằng: <strong>Nội tâm cũng giống như cơ thể, không thể chỉ "hiểu" là thay đổi, mà cần được rèn luyện mỗi ngày.</strong> Và khi nàng thay đổi cách mình chọn, cuộc đời nàng tự thay đổi theo.</p>
       </div>
     </div>
-
     <div class="origin-stages reveal">
       <div class="stage-card"><div class="stage-num">1</div><div class="stage-title">TRƯỚC</div><div class="stage-desc">Cuộc sống ổn… nhưng bên trong rỗng tuếch</div></div>
       <div class="stage-card"><div class="stage-num">2</div><div class="stage-title">ĐẤU TRANH</div><div class="stage-desc">Vòng lặp không lối ra, lặp đi lặp lại</div></div>
@@ -380,24 +443,21 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
     <p class="framework-intro reveal">Trong Tập Gym Nội Tâm, nàng không học cách "làm đúng". Nàng học cách thay đổi cách mình vận hành từ bên trong. Hệ thống này xoay quanh 3 bước rất đơn giản — nhưng nếu thiếu bất kỳ bước nào, nàng sẽ tiếp tục mắc kẹt.</p>
     <div class="framework-grid">
       <div class="fw-card reveal">
-        <h3>REGULATE</h3>
-        <h4>Điều Hòa</h4>
+        <h3>REGULATE</h3><h4>Điều Hòa</h4>
         <p><strong>Nàng có dừng lại được không?</strong></p>
         <p>Trước khi nàng hiểu được cảm xúc của mình, nàng cần có khả năng ở lại với nó mà không bị cuốn đi. Hầu hết mọi người khi bị trigger sẽ hoặc phản ứng ngay, hoặc cố đè nó xuống. Cả hai đều không phải là "làm chủ".</p>
         <div class="example">Người nàng đang tìm hiểu rep chậm hơn. Đầu nàng bắt đầu chạy: "Họ đang chán mình à?" Nàng muốn nhắn thêm, muốn kiểm tra…</div>
         <p class="miss">❌ Nếu thiếu: Nàng sẽ luôn phản ứng theo cảm xúc nhất thời — mọi thứ chỉ là hệ quả của phản xạ cũ.</p>
       </div>
       <div class="fw-card reveal">
-        <h3>REFLECT</h3>
-        <h4>Soi Chiếu</h4>
+        <h3>REFLECT</h3><h4>Soi Chiếu</h4>
         <p><strong>Nàng có thấy mình đang làm gì không?</strong></p>
         <p>Khi đã dừng lại được, nàng mới bắt đầu nhìn vào bên trong. Không phải để phán xét. Mà để hiểu: "Thật ra mình đang bị cái gì điều khiển?"</p>
         <div class="example">"Mình không chỉ đang khó chịu vì họ rep chậm." "Mình đang sợ bị bỏ rơi." "Mình đang cần họ xác nhận giá trị của mình."</div>
         <p class="miss">❌ Nếu thiếu: Nàng sẽ tiếp tục nghĩ vấn đề nằm ở người kia. Đổi người… nhưng câu chuyện vẫn lặp lại.</p>
       </div>
       <div class="fw-card reveal">
-        <h3>REWIRE</h3>
-        <h4>Đổi Phản Xạ</h4>
+        <h3>REWIRE</h3><h4>Đổi Phản Xạ</h4>
         <p><strong>Nàng có sống khác đi được không?</strong></p>
         <p>Đây là bước hầu hết mọi người không làm được. Họ hiểu. Họ nhận ra. Nhưng vẫn hành động như cũ. Rewire là lúc nàng bắt đầu chọn một phản ứng khác — dù cảm xúc cũ vẫn còn.</p>
         <div class="example">Trước: thấy khó chịu → nhắn thêm → kiểm soát tình huống.<br>Bây giờ: vẫn thấy urge đó, nhưng không hành động theo. Ở lại với cảm giác. Để nó đi qua.</div>
@@ -479,11 +539,8 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
       <div class="divider"></div>
       <p style="font-size:0.85rem;color:var(--text);margin-bottom:0;">Đừng lầm tưởng rằng chỉ những người "ổn sẵn" mới có thể thay đổi. Những câu chuyện dưới đây bắt đầu từ những tầng sâu nhất của sự đổ vỡ, lo âu và tự nghi ngờ.</p>
     </div>
-
     <div class="cases-scroll-wrap" id="casesScroll">
       <div class="cases-row">
-
-        <!-- Case 1: Chị D -->
         <div class="case-card">
           <span class="case-label">Case 1</span>
           <h4>Chị D — Từ "Kẻ Săn Đuổi" Lo Âu Đến Sự Tự Tại</h4>
@@ -495,8 +552,6 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
           </ul>
           <div class="case-quote">"Từng chút một, em đã cùng chị nhìn sâu vào từng 'bóng tối' bên trong chị… và ôm ấp chúng. Hành trình 'bò lên từ đáy' này… không còn quá khó như chị nghĩ."</div>
         </div>
-
-        <!-- Case 2: Chị Ngân -->
         <div class="case-card">
           <span class="case-label">Case 2</span>
           <h4>Chị Ngân — Từ "Nỗ Lực Bù Đắp" Đến Tự Nhận Diện Giá Trị</h4>
@@ -508,8 +563,6 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
           </ul>
           <div class="case-quote">"Em tập cách nhận diện ranh giới, lên tiếng khi cần thiết. Biết được giá trị của mình là gì mà không cần người khác thừa nhận hay khen ngợi."</div>
         </div>
-
-        <!-- Case 3: Chị My -->
         <div class="case-card">
           <span class="case-label">Case 3</span>
           <h4>Chị My — Từ "Đóng Băng" Quan Sát Đến Dấn Thân Vào Thực Tại</h4>
@@ -521,8 +574,6 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
           </ul>
           <div class="case-quote">"Từ hôm nay, mỗi khi tôi tự trách, tôi sẽ dừng lại. Tôi yêu chính mình, kể cả khi tôi không làm đúng mọi thứ…"</div>
         </div>
-
-        <!-- Case 4: Chị Teresa -->
         <div class="case-card">
           <span class="case-label">Case 4</span>
           <h4>Chị Teresa — Từ "Nội Tâm Bỏ Đói" Đến Sự Chuyển Hóa "Lấp Lánh"</h4>
@@ -535,8 +586,6 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
           </ul>
           <div class="case-quote">"Vì phiên bản rạng ngời, lung linh, lấp lánh đang chờ mình chạm tới, thì không có lý do gì để đứng mãi cả. Lòng mình như đang hân hoan nhảy múa."</div>
         </div>
-
-        <!-- Case 5: Chị M cốt thỏ -->
         <div class="case-card">
           <span class="case-label">Case 5</span>
           <h4>Chị M — Từ "Cốt Thỏ" Sợ Hãi Đến Người Phụ Nữ Tự Cầm Lái Cuộc Đời</h4>
@@ -549,8 +598,6 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
           </ul>
           <div class="case-quote">"Hóa ra, tự do đích thực là tự do trước mọi nỗi sợ. Mình tập nhìn chính mình với đôi mắt bao dung, bớt dần sự lệ thuộc vào nguồn xoa dịu bên ngoài."</div>
         </div>
-
-        <!-- Case 6: Bé Nhung -->
         <div class="case-card">
           <span class="case-label">Case 6</span>
           <h4>Bé Nhung — Từ "Cô Bé Núp Lùm" Đến Phép Màu Hiện Diện</h4>
@@ -562,10 +609,8 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
           </ul>
           <div class="case-quote">"Nỗi sợ không định nghĩa mình là ai, nỗi sợ tôi luyện mình. Em không còn từ chối những điều tốt đẹp nữa, vì em nhận ra mình vốn dĩ đã xứng đáng rồi. Ta chính là phép màu của cuộc đời mình."</div>
         </div>
-
       </div>
     </div>
-
     <div class="cases-footer reveal">
       <p><strong>Điểm chung của họ là gì?</strong> Họ không bắt đầu với sự tự tin hay một phiên bản "ổn". Họ bắt đầu từ sự mông lung, tự nghi ngờ và những vòng lặp bế tắc tưởng chừng không lối thoát.</p>
       <p style="margin-top:14px;">Nhưng họ có một điểm khác biệt duy nhất: <strong>Họ không tiếp tục làm một mình.</strong> Nếu những người từng ở "dưới đáy" đều có thể đứng vững, thì câu hỏi dành cho nàng là: Nàng có cho phép mình một cơ hội để thực hiện cuộc chuyển hóa tương tự không? ✨</p>
@@ -578,14 +623,13 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
   <div class="pricing-inner">
     <div class="reveal" style="margin-bottom:50px;">
       <span class="section-tag">Section 08 — Offer Stack &amp; Pricing</span>
-      <h2 class="section-heading">Giá Trị &amp;<br><em>Đầu Tư Của Bạn</em></h2>
+      <h2 class="section-heading">Giá Trị &amp;<br><em>Đầu Tư Của Nàng</em></h2>
       <div class="divider"></div>
     </div>
-    <p class="pricing-intro reveal">Đây không phải một khóa học để bạn "xem thử". Đây là một hệ sinh thái bạn bước vào để tái cấu trúc cách mình vận hành.</p>
-
+    <p class="pricing-intro reveal">Đây không phải một khóa học để nàng "xem thử". Đây là một hệ sinh thái nàng bước vào để tái cấu trúc cách mình vận hành.</p>
     <div class="value-stack reveal">
       <div class="value-row">
-        <div class="value-left"><h4>02 Buổi Zoom Group Coaching mỗi tháng</h4><p>Linh trực tiếp tháo gỡ vấn đề theo đúng tình huống thực tế của bạn</p></div>
+        <div class="value-left"><h4>02 Buổi Zoom Group Coaching mỗi tháng</h4><p>Linh trực tiếp tháo gỡ vấn đề theo đúng tình huống thực tế của nàng</p></div>
         <div class="value-price">2.000.000 đ/tháng</div>
       </div>
       <div class="value-row">
@@ -593,27 +637,25 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
         <div class="value-price">5.000.000 đ/tháng</div>
       </div>
       <div class="value-row">
-        <div class="value-left"><h4>Hệ Thống 3R &amp; Bài Tập Thực Hành Mỗi Ngày</h4><p>Công cụ giúp bạn thật sự thay đổi phản xạ thần kinh, không chỉ hiểu lý thuyết</p></div>
+        <div class="value-left"><h4>Hệ Thống 3R &amp; Bài Tập Thực Hành Mỗi Ngày</h4><p>Công cụ giúp nàng thật sự thay đổi phản xạ thần kinh, không chỉ hiểu lý thuyết</p></div>
         <div class="value-price">Không thể định giá</div>
       </div>
       <div class="value-row">
-        <div class="value-left"><h4>Group Zalo có Linh Đồng Hành Sát</h4><p>Được phản hồi ngay khi bạn đang gặp rắc rối, không phải chờ đợi trong cô độc</p></div>
+        <div class="value-left"><h4>Group Zalo có Linh Đồng Hành Sát</h4><p>Được phản hồi ngay khi nàng đang gặp rắc rối, không phải chờ đợi trong cô độc</p></div>
         <div class="value-price">Vô giá</div>
       </div>
     </div>
-
     <div class="value-total reveal">
       <span>Tổng Giá Trị Tối Thiểu</span>
       <strong>7.000.000 đ/tháng</strong>
     </div>
-
     <div class="price-cards">
       <div class="price-card reveal">
         <span class="plan-label">Gói Cơ Bản</span>
         <h4>Từng Tháng</h4>
         <div class="price-main"><sup>đ</sup>1.099<span style="font-size:1.2rem;">.000</span></div>
         <div class="price-sub">/ tháng</div>
-        <a href="mailto:linh@tapgymnoitam.com?subject=Đăng ký Gói Từng Tháng" class="price-cta">Chọn Gói Này</a>
+        <button class="price-cta" onclick="openModal('Gói Từng Tháng')">Chọn Gói Này</button>
       </div>
       <div class="price-card featured reveal">
         <span class="badge">+ Phổ Biến Nhất</span>
@@ -622,7 +664,7 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
         <div class="price-main"><sup>đ</sup>879<span style="font-size:1.2rem;">.000</span></div>
         <div class="price-sub">/ tháng</div>
         <div class="price-total">Tổng 5.275.000đ</div>
-        <a href="mailto:linh@tapgymnoitam.com?subject=Đăng ký Gói 6 Tháng" class="price-cta">Chọn Gói Này</a>
+        <button class="price-cta" onclick="openModal('Gói 6 Tháng')">Chọn Gói Này</button>
       </div>
       <div class="price-card reveal">
         <span class="plan-label">Tối Ưu Nhất</span>
@@ -631,10 +673,9 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
         <div class="price-sub">/ tháng</div>
         <div class="price-total">Tổng 9.891.000đ</div>
         <div class="save-badge">Tiết kiệm tối đa</div>
-        <a href="mailto:linh@tapgymnoitam.com?subject=Đăng ký Gói 12 Tháng" class="price-cta">Chọn Gói Này</a>
+        <button class="price-cta" onclick="openModal('Gói 12 Tháng')">Chọn Gói Này</button>
       </div>
     </div>
-
     <div class="pricing-note reveal">
       <strong>Cam kết hoàn tiền từ Linh:</strong> Nếu nàng thực hành đầy đủ theo hướng dẫn, chủ động đặt câu hỏi khi gặp khó khăn, nhưng sau một thời gian vẫn không thấy bất kỳ chuyển biến nào trong tâm thức — Linh sẽ hoàn tiền 100%. Vì nếu nàng đã thật sự nỗ lực mà vẫn không thay đổi, thì vấn đề không còn nằm ở nàng nữa.
     </div>
@@ -674,7 +715,6 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
         </div>
       </div>
     </div>
-
     <div class="faq-section reveal">
       <h2 class="section-heading" style="text-align:center;">Những Câu Hỏi<br><em>Nàng Đang Trăn Trở</em></h2>
       <div class="divider" style="margin:22px auto;"></div>
@@ -705,11 +745,10 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
         </div>
       </div>
     </div>
-
     <div class="final-cta reveal">
-      <h2>Bạn không cần phải hoàn hảo<br>để bắt đầu.</h2>
+      <h2>Nàng không cần phải hoàn hảo<br>để bắt đầu.</h2>
       <p>Điều nàng cần lúc này không phải là một phép màu, mà là một quyết định. Quyết định đủ thành thật để nhìn vào chính mình và đủ quyết liệt để nói "KHÔNG" với những nỗi đau cũ. Nếu nàng đã đọc đến tận những dòng cuối cùng này, Linh tin là trái tim nàng đã có câu trả lời rồi.</p>
-      <a href="mailto:linh@tapgymnoitam.com?subject=Tôi Chọn Chuyển Hóa" class="cta-btn"><span>Tôi Chọn Chuyển Hóa — Đăng Ký Ngay Bây Giờ →</span></a>
+      <button class="cta-btn" onclick="openModal('Final CTA')"><span>Tôi Chọn Chuyển Hóa — Đăng Ký Ngay →</span></button>
       <p class="final-note">Ưu đãi tặng kèm Story Preview chỉ dành cho các nàng quyết định sớm trước khi hệ thống khóa sổ</p>
     </div>
   </div>
@@ -727,19 +766,133 @@ footer { padding:36px 60px; background:#1a1018; color:white; display:flex; justi
   <p class="footer-copy">© 2025 Tập Gym Nội Tâm — Được tạo ra với yêu thương và chủ đích</p>
 </footer>
 
+<!-- MODAL ĐĂNG KÝ -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <span class="modal-tag">Bắt Đầu Hành Trình</span>
+    <h2 class="modal-title">Đăng Ký<br><em>Gym Nội Tâm</em></h2>
+    <div class="modal-divider"></div>
+    <p class="modal-sub">Linh sẽ liên hệ nàng trong vòng 24 giờ để xác nhận và hướng dẫn các bước tiếp theo. 💜</p>
+    <form id="registrationForm" onsubmit="handleSubmit(event)">
+      <input type="hidden" name="_subject" value="Đăng ký mới — Tập Gym Nội Tâm">
+      <input type="hidden" name="source" id="formSource" value="">
+      <div class="form-group">
+        <label for="fullName">Tên của nàng *</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Ví dụ: Minh Anh" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Số Zalo / Điện thoại *</label>
+        <input type="tel" id="phone" name="phone" placeholder="Linh sẽ liên hệ qua Zalo" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="email@gmail.com (không bắt buộc)">
+      </div>
+      <div class="form-group">
+        <label for="package">Gói nàng muốn đăng ký *</label>
+        <select id="package" name="package" required>
+          <option value="" disabled selected>Chọn gói phù hợp với nàng</option>
+          <option value="1 tháng — 1.099.000đ/tháng">1 Tháng — 1.099.000đ/tháng</option>
+          <option value="6 tháng — 879.000đ/tháng (tiết kiệm 20%)">6 Tháng — 879.000đ/tháng (tiết kiệm 20%)</option>
+          <option value="12 tháng — 825.000đ/tháng (tiết kiệm 25%)">12 Tháng — 825.000đ/tháng (tiết kiệm 25%)</option>
+          <option value="Chưa chắc, muốn tư vấn thêm">Chưa chắc, muốn tư vấn thêm</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Điều nàng muốn Linh biết (không bắt buộc)</label>
+        <textarea id="message" name="message" placeholder="Nàng đang ở đâu trong hành trình của mình?"></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="submitBtn">
+        <span id="submitText">Gửi Đăng Ký →</span>
+      </button>
+      <p class="form-note">Thông tin của nàng được bảo mật tuyệt đối. Linh sẽ phản hồi trong 24 giờ.</p>
+    </form>
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">🌸</div>
+      <h3>Linh đã nhận được rồi!</h3>
+      <p>Cảm ơn nàng đã tin tưởng và bước đầu tiên này. Linh sẽ nhắn Zalo cho nàng trong vòng <strong>24 giờ</strong>. 💜</p>
+    </div>
+  </div>
+</div>
+
 <script>
+/* Scroll reveal */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Drag to scroll for cases
+/* Drag to scroll */
 const scroll = document.getElementById('casesScroll');
 let isDown = false, startX, scrollLeft;
-scroll.addEventListener('mousedown', e => { isDown=true; scroll.classList.add('active'); startX=e.pageX-scroll.offsetLeft; scrollLeft=scroll.scrollLeft; });
+scroll.addEventListener('mousedown', e => { isDown=true; startX=e.pageX-scroll.offsetLeft; scrollLeft=scroll.scrollLeft; });
 scroll.addEventListener('mouseleave', () => { isDown=false; });
 scroll.addEventListener('mouseup', () => { isDown=false; });
 scroll.addEventListener('mousemove', e => { if(!isDown) return; e.preventDefault(); const x=e.pageX-scroll.offsetLeft; scroll.scrollLeft=scrollLeft-(x-startX)*1.5; });
+
+/* Hamburger */
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+});
+function closeMobileNav() {
+  hamburger.classList.remove('open');
+  mobileNav.classList.remove('open');
+}
+
+/* Floating CTA */
+window.addEventListener('scroll', () => {
+  document.getElementById('floatingCta').classList.toggle('show', window.scrollY > 500);
+});
+
+/* Modal */
+function openModal(source) {
+  document.getElementById('formSource').value = source || '';
+  const pkg = document.getElementById('package');
+  if (source === 'Gói Từng Tháng') pkg.value = '1 tháng — 1.099.000đ/tháng';
+  else if (source === 'Gói 6 Tháng') pkg.value = '6 tháng — 879.000đ/tháng (tiết kiệm 20%)';
+  else if (source === 'Gói 12 Tháng') pkg.value = '12 tháng — 825.000đ/tháng (tiết kiệm 25%)';
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* Form submit */
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const text = document.getElementById('submitText');
+  btn.disabled = true;
+  text.textContent = 'Đang gửi…';
+  const data = new FormData(document.getElementById('registrationForm'));
+  try {
+    const res = await fetch('https://formspree.io/f/mwzd5jz', {
+      method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('registrationForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else { throw new Error(); }
+  } catch {
+    const name = data.get('fullName') || '';
+    const phone = data.get('phone') || '';
+    const pkg = data.get('package') || '';
+    const msg = data.get('message') || '';
+    window.location.href = `mailto:linh@tapgymnoitam.com?subject=${encodeURIComponent('Đăng ký Gym Nội Tâm — ' + name)}&body=${encodeURIComponent('Tên: ' + name + '\nZalo: ' + phone + '\nGói: ' + pkg + '\n\n' + msg)}`;
+    btn.disabled = false;
+    text.textContent = 'Gửi Đăng Ký →';
+  }
+}
 </script>
 </body>
 </html>
